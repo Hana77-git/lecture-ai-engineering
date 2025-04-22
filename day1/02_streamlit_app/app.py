@@ -31,8 +31,6 @@ def load_model():
     try:
         device = "cuda" if torch.cuda.is_available() else "cpu"
         st.info(f"Using device: {device}") # 使用デバイスを表示
-        if device == "cpu":
-          st.warning("CPUで動かしているため、回答に時間がかかります。可能であればGPUに切り替えてください")
         pipe = pipeline(
             "text-generation",
             model=MODEL_NAME,
