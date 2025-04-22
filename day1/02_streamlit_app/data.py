@@ -85,6 +85,14 @@ SAMPLE_QUESTIONS_DATA = [
         "feedback": "部分的に正確: 基本的な説明はありますが、仮想マシンとの違いやDockerなどの具体例の説明が不足しています",
         "is_correct": 0.5,
         "response_time": 1.1
+    },
+    {
+        "question": "こんにちは！",
+        "answer": "こんにちは！",
+        "correct_answer": "こんにちは！",
+        "feedback": "質問ではない: 元気のいい挨拶です",
+        "is_correct": -1.0,
+        "response_time": 1.7
     }
 ]
 
