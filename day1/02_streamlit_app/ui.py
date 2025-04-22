@@ -61,7 +61,7 @@ def display_feedback_form():
     """フィードバック入力フォームを表示する"""
     with st.form("feedback_form"):
         st.subheader("フィードバック")
-        feedback_options = ["正確", "部分的に正確", "不正確"]
+        feedback_options = ["正確", "部分的に正確", "不正確", "質問ではない"]
         # label_visibility='collapsed' でラベルを隠す
         feedback = st.radio("回答の評価", feedback_options, key="feedback_radio", label_visibility='collapsed', horizontal=True)
         correct_answer = st.text_area("より正確な回答（任意）", key="correct_answer_input", height=100)
@@ -69,7 +69,14 @@ def display_feedback_form():
         submitted = st.form_submit_button("フィードバックを送信")
         if submitted:
             # フィードバックをデータベースに保存
-            is_correct = 1.0 if feedback == "正確" else (0.5 if feedback == "部分的に正確" else 0.0)
+            if feedback == "正確":
+              is_correct = 1.0
+            elif feedback == "部分的に正確":
+              is_correct = 0.5
+            elif feedback == "不正確":
+              is_correct = 0.0
+            else:
+              is_correct = -1.0
             # コメントがない場合でも '正確' などの評価はfeedbackに含まれるようにする
             combined_feedback = f"{feedback}"
             if feedback_comment:
@@ -116,7 +123,8 @@ def display_history_list(history_df):
         "すべて表示": None,
         "正確なもののみ": 1.0,
         "部分的に正確なもののみ": 0.5,
-        "不正確なもののみ": 0.0
+        "不正確なもののみ": 0.0,
+        "質問ではないもののみ": -1.0
     }
     display_option = st.radio(
         "表示フィルタ",
