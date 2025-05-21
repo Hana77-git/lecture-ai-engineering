@@ -141,7 +141,7 @@ def test_model_file_size():
     max_size = 5 * 1024 * 1024  # 5MB
 
     assert (
-      file_size <= max_size 
+        file_size <= max_size
     ), f"モデルファイルが大きすぎます: {file_size / (1024 * 1024):.2f} MB"
 
 
