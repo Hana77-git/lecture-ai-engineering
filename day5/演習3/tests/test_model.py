@@ -136,6 +136,15 @@ def test_model_inference_time(train_model):
     assert inference_time < 1.0, f"推論時間が長すぎます: {inference_time}秒"
 
 
+def test_model_file_size():
+    file_size = os.path.getsize(MODEL_PATH)
+    max_size = 5 * 1024 * 1024  # 5MB
+
+    assert (
+        file_size <= max_size
+    ), f"モデルファイルが大きすぎます: {file_size / (1024 * 1024):.2f} MB"
+
+
 def test_model_reproducibility(sample_data, preprocessor):
     """モデルの再現性を検証"""
     # データの分割
